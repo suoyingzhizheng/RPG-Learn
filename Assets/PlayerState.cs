@@ -11,7 +11,7 @@ public class PlayerState
     protected float xInput;
     public PlayerState(Player _player, PlayerStateMachine _stateMachine,string _animBollName)
     {
-        this.Player = _player;
+        this.Player = _player;//赋值给当前类的player字段
         this.stateMachine = _stateMachine;
         this.animBoolName = _animBollName;
     }
@@ -27,6 +27,5 @@ public class PlayerState
     public virtual void Exit()
     {
         Player.anim.SetBool(animBoolName, false);
-      
     }
 }

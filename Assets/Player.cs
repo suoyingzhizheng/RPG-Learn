@@ -19,12 +19,12 @@ public class Player : MonoBehaviour
     private void Awake()
     {//³õÊ¼»¯×´Ì¬»ú
         StateMachine = new PlayerStateMachine();
-        IdleState = new PlayerIdleState(this,StateMachine,"Idle");
+        IdleState = new PlayerIdleState(this, StateMachine,"Idle");
         MoveState = new PlayerMoveState(this, StateMachine, "Move");
     }
     private void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         StateMachine.Initialize(IdleState);
     }
