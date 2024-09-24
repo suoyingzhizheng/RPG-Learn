@@ -13,9 +13,9 @@ public class PlayerStateMachine : MonoBehaviour
     }
     public void ChangeState(PlayerState _newState)
     {
-        currentState.Exit(); 
-        currentState = _newState;
-        currentState.Enter();
+        currentState.Exit(); //当前状态退出
+        currentState = _newState;//建立新状态
+        currentState.Enter();//进入新状态
     }
      
 }

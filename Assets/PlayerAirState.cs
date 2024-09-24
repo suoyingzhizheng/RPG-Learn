@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGroundedState : PlayerState
+public class PlayerAirState : PlayerState
 {
-    public PlayerGroundedState(Player _player, PlayerStateMachine _stateMachine, string _animBollName) : base(_player, _stateMachine, _animBollName)
+    public PlayerAirState(Player _player, PlayerStateMachine _stateMachine, string _animBollName) : base(_player, _stateMachine, _animBollName)
     {
     }
 
@@ -21,9 +21,9 @@ public class PlayerGroundedState : PlayerState
     public override void Update()
     {
         base.Update();
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (rb.velocity.y == 0)
         {
-            stateMachine.ChangeState(Player.JumpState);
+            stateMachine.ChangeState(Player.IdleState);
         }
     }
 }

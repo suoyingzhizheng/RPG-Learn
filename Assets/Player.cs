@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     [Header("Move info")]
     public float MoveSpeed = 12f;
+    public float JumpForce;
     public Rigidbody2D rb {  get; private set; }
     #region Components
     public Animator anim { get; private set; }
@@ -15,12 +16,16 @@ public class Player : MonoBehaviour
     public PlayerIdleState IdleState { get; private set; }
 
     public PlayerMoveState MoveState { get; private set; }
+    public PlayerAirState AirState {  get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
     #endregion
     private void Awake()
     {//³õÊ¼»¯×´Ì¬»ú
         StateMachine = new PlayerStateMachine();
         IdleState = new PlayerIdleState(this, StateMachine,"Idle");
         MoveState = new PlayerMoveState(this, StateMachine, "Move");
+        AirState = new PlayerAirState(this, StateMachine, "Jump");
+        JumpState = new PlayerJumpState(this, StateMachine, "Jump");
     }
     private void Start()
     {
