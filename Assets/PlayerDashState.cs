@@ -2,33 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAirState : PlayerState
+public class PlayerDashState : PlayerState
 {
-    public PlayerAirState(Player _player, PlayerStateMachine _stateMachine, string _animBollName) : base(_player, _stateMachine, _animBollName)
+    public PlayerDashState(Player _player, PlayerStateMachine _stateMachine, string _animBollName) : base(_player, _stateMachine, _animBollName)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
+        StateTimer = Player.DashDuration;
     }
 
     public override void Exit()
     {
         base.Exit();
+        Player.SetVelocity(0,rb.velocity.y);
     }
 
     public override void Update()
     {
         base.Update();
-       
-        if (Player.IsGroundedDetected())
+        
+        Player.SetVelocity(Player.DashSpeed*Player.DashDir,0);
+        if (StateTimer < 0)
         {
             StateMachine.ChangeState(Player.IdleState);
-        }
-        if (xInput != 0)
-        {
-            Player.SetVelocity(xInput*Player.MoveSpeed*.8f,rb.velocity.y);
         }
     }
 }

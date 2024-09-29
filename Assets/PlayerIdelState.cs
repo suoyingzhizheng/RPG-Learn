@@ -23,7 +23,7 @@ public class PlayerIdleState : PlayerGroundedState
         base.Update();
         if(xInput!=0)
         {
-            stateMachine.ChangeState(Player.MoveState);
+            StateMachine.ChangeState(Player.MoveState);
         }
     }
 }
