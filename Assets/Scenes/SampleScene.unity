@@ -272,7 +272,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 877434011}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2f795749738adb948b6606e514fd818f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -369,8 +369,8 @@ Transform:
   m_GameObject: {fileID: 877434011}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.07, y: -3.54, z: 0}
-  m_LocalScale: {x: 13.323891, y: 1, z: 1}
+  m_LocalPosition: {x: 12.4473, y: -1.2923, z: 0}
+  m_LocalScale: {x: 14.568042, y: 6.795314, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -651,7 +651,7 @@ MonoBehaviour:
   GroundCheck: {fileID: 828987652}
   GroundCheckDistance: 0.29
   WallCheck: {fileID: 1857736347}
-  WallCheckDistance: 0.52
+  WallCheckDistance: 0.34
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 8
@@ -892,7 +892,7 @@ Transform:
   m_GameObject: {fileID: 1857736346}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.21, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

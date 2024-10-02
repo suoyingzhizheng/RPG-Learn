@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     public PlayerAirState AirState {  get; private set; }
     public PlayerJumpState JumpState { get; private set; }
     public PlayerDashState DashState { get; private set; }
+    public PlayerSlideState SlideState { get; private set; }    
     #endregion
     private void Awake()
     {//³õÊ¼»¯×´Ì¬»ú
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour
         AirState = new PlayerAirState(this, StateMachine, "Jump");
         JumpState = new PlayerJumpState(this, StateMachine, "Jump");
         DashState = new PlayerDashState(this, StateMachine, "Dash");
+        SlideState = new PlayerSlideState(this, StateMachine, "Slide");
     }
     private void Start()
     {
@@ -57,7 +59,8 @@ public class Player : MonoBehaviour
     private void Update()
     {
         StateMachine.currentState.Update();
-        CheckDashInput();   
+        CheckDashInput();
+        
        
         
     }
@@ -78,6 +81,7 @@ public class Player : MonoBehaviour
         FliopController(_xVelocity);
     }
     public bool IsGroundedDetected() =>Physics2D.Raycast(GroundCheck.position,Vector2.down,GroundCheckDistance,WhatIsGround);
+    public bool IsWallDetected() => Physics2D.Raycast(WallCheck.position, Vector2.right*FacingDir, WallCheckDistance, WhatIsGround);
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(GroundCheck.position,new Vector3(GroundCheck.position.x, GroundCheck.position.y - GroundCheckDistance));
