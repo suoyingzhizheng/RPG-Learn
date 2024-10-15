@@ -23,7 +23,10 @@ public class PlayerDashState : PlayerState
     public override void Update()
     {
         base.Update();
-        
+        if(!Player.IsGroundedDetected()&&Player.IsWallDetected())
+        {
+            StateMachine.ChangeState(Player.SlideState);
+        }
         Player.SetVelocity(Player.DashSpeed*Player.DashDir,0);
         if (StateTimer < 0)
         {

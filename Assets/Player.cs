@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [Header("Dash info")]
     [SerializeField] private float DashCoolDown;
     [SerializeField] private float DashTimer;
+    private float DashUsageTimer;
     public float DashSpeed;
     public float DashDuration;
     public float DashDir { get; private set; }
@@ -22,11 +23,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float WallCheckDistance;
     [SerializeField] private LayerMask WhatIsGround;
    
-    public Rigidbody2D rb {  get; private set; }
     public int FacingDir { get; private set; } = 1;
     private bool FacingRight = true;
     #region Components
     public Animator anim { get; private set; }
+    public Rigidbody2D rb {  get; private set; }
     #endregion
     #region States
     public PlayerStateMachine StateMachine {  get; private set; }//允许外界读取数据 但不能改变数据
@@ -37,6 +38,8 @@ public class Player : MonoBehaviour
     public PlayerJumpState JumpState { get; private set; }
     public PlayerDashState DashState { get; private set; }
     public PlayerSlideState SlideState { get; private set; }    
+    public PlayerWallJumpState WallJumpState { get; private set; }
+    public PlayerAttackState AttackState { get; private set; }
     #endregion
     private void Awake()
     {//初始化状态机
@@ -47,6 +50,8 @@ public class Player : MonoBehaviour
         JumpState = new PlayerJumpState(this, StateMachine, "Jump");
         DashState = new PlayerDashState(this, StateMachine, "Dash");
         SlideState = new PlayerSlideState(this, StateMachine, "Slide");
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, "Jump");
+        AttackState = new PlayerAttackState(this, StateMachine, "Attack");
     }
     private void Start()
     {
@@ -66,9 +71,13 @@ public class Player : MonoBehaviour
     }
     private void CheckDashInput()
     {
-  
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if(IsWallDetected())
+        { return; }
+
+       DashUsageTimer -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.LeftShift)&&DashUsageTimer<0)
         {
+            DashUsageTimer = DashCoolDown;
             DashDir = Input.GetAxisRaw("Horizontal");
             if (DashDir == 0)
                 DashDir = FacingDir;
@@ -95,13 +104,14 @@ public class Player : MonoBehaviour
     }
     public void FliopController(float _x)
     {
-        if(_x<0&&FacingRight)
+        if(_x<0&&FacingRight&&!IsWallDetected())//为了改人物爬行的bug 加了条件 但会导致跳墙动作的bug 记得改
         {
             Flip();
         }
-        else if(_x>0&&!FacingRight)
+        else if(_x>0&&!FacingRight&&!IsWallDetected())
         {
             Flip();
         }
     }
+    public void AnimiationTrigger() => StateMachine.currentState.AnimatorFinishTrigger();
 }

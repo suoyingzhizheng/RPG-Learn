@@ -11,6 +11,7 @@ public class PlayerState
     protected float xInput;
     protected float yInput;
     protected float StateTimer;
+    protected bool triggerCalled;
     public PlayerState(Player _player, PlayerStateMachine _stateMachine,string _animBollName)
     {
         this.Player = _player;//赋值给当前类的player字段
@@ -21,6 +22,7 @@ public class PlayerState
     {
         Player.anim.SetBool(animBoolName, true);
         rb = Player.rb;
+        triggerCalled = false;
     }
     public virtual void Update()
     {
@@ -33,5 +35,9 @@ public class PlayerState
     public virtual void Exit()
     {
         Player.anim.SetBool(animBoolName, false);//将当前的的布尔值改为0
+    }
+    public void AnimatorFinishTrigger()
+    {
+        triggerCalled = true;
     }
 }

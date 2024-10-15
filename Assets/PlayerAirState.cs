@@ -28,7 +28,7 @@ public class PlayerAirState : PlayerState
         }
         if (xInput != 0)
         {
-            Player.SetVelocity(xInput*Player.MoveSpeed * .8f,rb.velocity.y);
+            Player.SetVelocity(Player.MoveSpeed * .8f * xInput,rb.velocity.y);
         }
         if(Player.IsWallDetected())
         {

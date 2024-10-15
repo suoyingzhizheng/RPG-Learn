@@ -11,6 +11,8 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+        rb.velocity = new Vector2(0, 0);//转换到该状态速度归零
+
     }
 
     public override void Exit()
