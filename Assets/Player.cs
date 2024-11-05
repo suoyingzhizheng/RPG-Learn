@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
        
         
     }
+    public void AnimiationTrigger() => StateMachine.currentState.AnimatorFinishTrigger();
     private void CheckDashInput()
     {
         if(IsWallDetected())
@@ -113,5 +114,5 @@ public class Player : MonoBehaviour
             Flip();
         }
     }
-    public void AnimiationTrigger() => StateMachine.currentState.AnimatorFinishTrigger();
+    
 }

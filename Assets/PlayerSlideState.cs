@@ -26,7 +26,6 @@ public class PlayerSlideState : PlayerState
             StateMachine.ChangeState(Player.WallJumpState);
             return;
         }
-        Debug.Log(Player.FacingDir);
         if(xInput != 0 && Player.FacingDir != xInput)
         {
           

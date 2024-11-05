@@ -38,6 +38,6 @@ public class PlayerState
     }
     public void AnimatorFinishTrigger()
     {
-        triggerCalled = true;
+        triggerCalled = true; 
     }
 }
