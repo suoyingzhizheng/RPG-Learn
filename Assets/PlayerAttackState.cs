@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackState : PlayerState
+public class PlayerAttackState : PlayerGroundedState
 {
     private int comboCounter=0;
     private float lastTimeAttack;
@@ -14,8 +14,9 @@ public class PlayerAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        if (comboCounter >3) { comboCounter = 0; }
-        Debug.Log(comboCounter);
+       if (comboCounter > 3||lastTimeAttack>=Time.time+comboCounter) { comboCounter = 0; }
+        Player.anim.SetInteger("comboCounter", comboCounter);//这行代码的意思是将一个整数值 comboCounter 设置到 Player 对象的动画控制器中。
+
     }
 
     public override void Exit()
@@ -23,8 +24,7 @@ public class PlayerAttackState : PlayerState
         base.Exit();
         comboCounter++;
         lastTimeAttack = Time.time; 
-        Player.anim.SetInteger("comboCounter",comboCounter);//这行代码的意思是将一个整数值 comboCounter 设置到 Player 对象的动画控制器中。
-
+        
     }
 
     public override void Update()
