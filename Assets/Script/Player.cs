@@ -90,6 +90,7 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(_xVelocity, _yVelocity);
         FliopController(_xVelocity);
     }
+    #region coliision
     public bool IsGroundedDetected() =>Physics2D.Raycast(GroundCheck.position,Vector2.down,GroundCheckDistance,WhatIsGround);
     public bool IsWallDetected() => Physics2D.Raycast(WallCheck.position, Vector2.right*FacingDir, WallCheckDistance, WhatIsGround);
     private void OnDrawGizmos()
@@ -97,6 +98,7 @@ public class Player : MonoBehaviour
         Gizmos.DrawLine(GroundCheck.position,new Vector3(GroundCheck.position.x, GroundCheck.position.y - GroundCheckDistance));
         Gizmos.DrawLine(WallCheck.position,new Vector3(WallCheck.position.x+WallCheckDistance, WallCheck.position.y));
     }
+    #endregion 
     public void Flip()
     {
         FacingDir = FacingDir * -1;
