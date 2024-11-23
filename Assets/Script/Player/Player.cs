@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : Enitity
 {
+    [Header("Attack info")]
+    public Vector2[] attackMovement;
+    
     [Header("Move info")]
     public float MoveSpeed = 12f;//在 C# 中，float 类型用于表示单精度浮点数。如果你在赋值时不加 f 后缀，编译器会将数字默认视为 double 类型。这可能导致错误或警告，因为 double 类型的值不能直接赋给 float 类型的变量。
     public float JumpForce;
